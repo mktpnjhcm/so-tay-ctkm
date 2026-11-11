@@ -730,6 +730,8 @@ body{padding-bottom:64px;background:#F7F5F0}
 @media(max-width:640px){#smodes{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;gap:6px;scrollbar-width:none}#smodes button{flex:0 0 auto;padding:7px 12px;font-size:12.5px;white-space:nowrap}}
 @media(max-width:640px){.sctl{display:flex!important;flex-direction:column;gap:8px;min-width:0}#smodes{max-width:100%}#sch{display:flex;width:100%}#sch button{flex:1}}
 .tbload{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:999;background:#1B2B5E;color:#fff;font:600 13px var(--font);padding:10px 16px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.flash{animation:flashr 1.6s ease}@keyframes flashr{0%,60%{box-shadow:0 0 0 3px #E9C46A}100%{box-shadow:0 0 0 0 transparent}}
+@media(max-width:640px){[data-row]{scroll-margin-top:120px}}
 
 </style>
 <style>html{color-scheme:light dark}body{margin:0}</style>
@@ -2862,7 +2864,7 @@ function headMenu(pg){
   /* menu */
   const sec=(s,t)=>`<h4>${t}</h4>`+MONTH.pages.filter(x=>x.sec===s).map(x=>`<button type="button" data-p="${x.id}"${x.id===pg.id&&!cur.row?' aria-current="page"':''}><span>${x.code} ${esc(x.name)}</span><span class="ms">${'★'.repeat(Math.round(starVal(x)))}</span></button>`+(x.id===pg.id?(x.rows||[]).map(r=>`<button type="button" class="sub" data-p="${x.id}" data-row="${esc(r.code)}"${cur.row===r.code?' aria-current="page"':''}><span><b>${esc(r.code)}</b> ${esc(r.label)}</span></button>`).join(''):'')).join('');
   $('#menu').innerHTML=sec('A','A. CTKM cần nhớ')+sec('B','B. CTKM phát hành riêng')+'<h4>Công cụ</h4><button type="button" data-search="sd"><span>Tìm kiếm</span></button>';
-  $('#mselect').innerHTML=MONTH.pages.map(x=>`<option value="${x.id}"${x.id===pg.id?' selected':''}>${x.code} · ${esc(x.name)}</option>`).join('')+`<option value="search">Tìm kiếm</option>`;
+  $('#mselect').innerHTML=MONTH.pages.map(x=>`<option value="${x.id}"${x.id===pg.id&&!cur.row?' selected':''}>${x.code} · ${esc(x.name)}</option>`+(x.id===pg.id?(x.rows||[]).map(r=>`<option value="${x.id}/${esc(r.code)}"${cur.row===r.code?' selected':''}>\u00A0\u00A0\u00A0\u21B3 ${esc(r.code)} ${esc(r.label)}</option>`).join(''):'')).join('')+`<option value="search">Tìm kiếm</option>`;
 }
 function detHead(pg){
   const ks=TBMETA(pg.tb);
@@ -2878,7 +2880,10 @@ $('#menu').addEventListener('click',e=>{
   if(b.dataset.row){go(b.dataset.p,'det',b.dataset.row);return}
   go(b.dataset.p,'sum')
 });
-$('#mselect').addEventListener('change',e=>{if(e.target.value==='search')go('search','sd');else go(e.target.value,'sum')});
+$('#mselect').addEventListener('change',e=>{const v=e.target.value;if(v==='search')return go('search','sd');
+  const [p,row]=v.split('/');
+  if(row){if(cur.tab==='sum'&&cur.p===p){const el=document.querySelector('[data-row="'+row+'"]');if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);return}}go(p,'det',row)}
+  else go(p,'sum')});
 document.addEventListener('click',e=>{
   const rb=e.target.closest('[data-rate]');if(rb){openRate(rb.dataset.rate);return}
   if(e.target.closest('[data-home]')){go();return}
@@ -2915,7 +2920,7 @@ function renderSum(){
         const sale=it.sale?it.sale.split(/\s*·\s*/).map(x=>`<span class="salecode">${esc(x)}</span>`).join(''):'';
         return `<button type="button" class="sitem k-${it.k}" data-i="${it.id}"><span class="sih"><b>${esc(it.name)}</b>${tg}</span><span class="sit">${esc(win)}${sale?' · '+sale:''}</span><ul>${it.short.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${it.conc?`<span class="cchip${it.conc.cf&&it.conc.cf.length?' cf':''}">${esc(it.conc.chip)}</span>`:''}</button>`;
       }).join('');
-      return `<section class="srow${live?' live':''}"><h3><span class="gcode">${esc(r.code)}</span>${esc(r.label)}${live?'<span class="gnow">Đang chạy</span>':''}</h3><div class="sitems">${its}</div></section>`;
+      return `<section class="srow${live?' live':''}" data-row="${esc(r.code)}"><h3><span class="gcode">${esc(r.code)}</span>${esc(r.label)}${live?'<span class="gnow">Đang chạy</span>':''}</h3><div class="sitems">${its}</div></section>`;
     }).join('');
     box.innerHTML=h+`</div>`;return;
   }
@@ -2938,7 +2943,7 @@ function renderSum(){
       const a=dayIdx(it.from),b=dayIdx(it.to)+1;
       return `<button type="button" class="${cls}${a<0?' cl':''}${b>NDAYS?' cr':''}" style="${tp(it)}left:${pos(a)}%;width:${pos(b)-pos(a)}%" data-i="${it.id}" title="${esc(it.name)}">${lbl(it)}</button>`;
     }).join('');
-    return `<div class="grow${live?' live':''}"><div class="glabel"><span class="gcode">${esc(r.code)}</span>${esc(r.label)}${live?'<span class="gnow">Đang chạy</span>':''}</div><div class="gtrack" style="height:${nl*LH+2}px">${wl}${bars}${mark}</div></div>`;
+    return `<div class="grow${live?' live':''}" data-row="${esc(r.code)}"><div class="glabel"><span class="gcode">${esc(r.code)}</span>${esc(r.label)}${live?'<span class="gnow">Đang chạy</span>':''}</div><div class="gtrack" style="height:${nl*LH+2}px">${wl}${bars}${mark}</div></div>`;
   }).join('');
   h+=`<div class="gleg2"><span><i style="background:#E5484D"></i>Ngày đang xem (${fdFull(st.date)})</span><span>Thanh đậm: đang chạy · thanh mờ: chưa chạy hoặc đã kết thúc</span><span>Vuông cạnh: kéo dài ngoài ${esc(MONTH.name.toLowerCase())}</span></div></div>`;
   box.innerHTML=h;
