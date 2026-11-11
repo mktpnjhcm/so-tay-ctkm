@@ -2831,6 +2831,8 @@ function route(){
   const pg=pageById(p);if(!pg){go();return}
   showPage(pg,tab,item);
 }
+/* chưa đọc thông báo thì mỗi lần chuyển trang đều nhắc lại */
+window.addEventListener('hashchange',()=>setTimeout(()=>{try{if(typeof updAuto==='function')updAuto()}catch(_){}},350));
 function showPage(pg,tab,item){
   const all=pg.id==='ALL';
   if(all)tab='det';
@@ -3524,7 +3526,7 @@ async function updLoadRemote(){
     const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),4000);
     const r=await fetch('capnhat.json?t='+Date.now(),{cache:'no-store',signal:ctl.signal});clearTimeout(tm);
     if(!r.ok)return;
-    const j=await r.json();
+    const tx=await r.text();let j;try{j=JSON.parse(tx)}catch(_){j=JSON.parse(tx.replace(/,(\s*[\]}])/g,'$1'))}
     const rem=(Array.isArray(j)?j:(j&&j.updates)||[]).map(updClean).filter(Boolean);
     const ids=new Set(rem.map(x=>x.id));
     MONTH.updates=rem.concat(UPD_BASE.filter(x=>!ids.has(x.id)));
@@ -3544,7 +3546,7 @@ function updShow(u,left){
    <h3 id="poph" class="updh">${esc(u.title)}</h3>
    ${u.body.map(x=>`<p class="updb">${esc(x)}</p>`).join('')}
    <div class="updbtn"><button type="button" class="pbtn" data-updgo="${esc(u.id)}">${esc(u.btn||'XEM NGAY')}</button><button type="button" class="pbtn alt" data-updlater="1">ĐỂ SAU</button></div>
-   <p class="mini updn">${left>1?'Còn '+left+' thông báo chưa đọc. ':''}Chọn ĐỂ SAU sẽ giữ trạng thái chưa đọc và nhắc lại ở lần mở sổ tay tiếp theo.</p></div>`;
+   <p class="mini updn">${left>1?'Còn '+left+' thông báo chưa đọc. ':''}Chọn ĐỂ SAU sẽ giữ trạng thái chưa đọc và nhắc lại mỗi lần chuyển trang cho đến khi bấm nút xem.</p></div>`;
   $('#ov').classList.remove('tbv');
   if($('#ov').hidden)popFocus=document.activeElement;
   $('#ov').hidden=false;document.body.style.overflow='hidden';$('#popx').focus();$('#pop').scrollTop=0;
@@ -3572,6 +3574,7 @@ updBell();
 /* ---------- khởi động ---------- */
 route();
 loadRatings();
+if(/[?&]unread=1/.test(location.search)){try{sset(UPD_KEY,[])}catch(_){}}
 updLoadRemote().then(()=>{updBell();updAuto()});
 
 /* ---------- Xem PDF thông báo (popup cuộn được) ---------- */
