@@ -732,6 +732,20 @@ body{padding-bottom:64px;background:#F7F5F0}
 .tbload{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:999;background:#1B2B5E;color:#fff;font:600 13px var(--font);padding:10px 16px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .flash{animation:flashr 1.6s ease}@keyframes flashr{0%,60%{box-shadow:0 0 0 3px #E9C46A}100%{box-shadow:0 0 0 0 transparent}}
 @media(max-width:640px){[data-row]{scroll-margin-top:120px}}
+/* v14 tổng hợp dễ đọc */
+.sitem .sih{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.tpill{display:inline-block;font:700 11px/1.2 var(--font);letter-spacing:.2px;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#E6ECF8;color:#1B2B5E}
+.sitem.k-top .tpill{background:#FFE98A;color:#5C4400}.sitem.k-base .tpill{background:#DDE6F7;color:#1B2B5E}.sitem.k-brand .tpill{background:#E2DAF5;color:#43308A}.sitem.k-adhoc .tpill,.sgh .tpill{background:#D9F0E8;color:#146B52}.sitem.k-dm .tpill{background:#FBE4D2;color:#8A3D00}
+.sitem .stt{display:block;font:700 14px/1.35 var(--font);margin-bottom:3px}
+.sitem .sdate{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}.sitem .sdate em{font-style:normal;font-weight:700;color:#1B2B5E}
+.sitem .ssale{display:block;margin:2px 0 6px}
+.sitem li.main{font-weight:700;list-style:none;margin-left:-16px;padding:6px 8px;background:#F3F5FA;border-radius:8px;margin-bottom:4px}
+.sitem.s-live{border-left-color:#1E8A4C}.sitem.s-soon{border-left-color:#F5A623}.sitem.s-ended{border-left-color:#C5CAD6;opacity:.85}
+.sgroup{grid-column:1/-1;border:1.5px dashed #9FD3BE;border-radius:12px;padding:8px;background:rgba(217,240,232,.35)}
+.sgh{display:flex;align-items:center;gap:8px;margin:0 0 8px;flex-wrap:wrap}.sgh small{color:var(--muted);font-size:12px}
+.sgi{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+@media(max-width:640px){.sgi{grid-template-columns:minmax(0,1fr)}.sitem .stt{font-size:14.5px}}
+.sitem{display:flex!important;flex-direction:column;justify-content:flex-start;align-items:stretch}.sitem .sih{align-items:center}
 
 </style>
 <style>html{color-scheme:light dark}body{margin:0}</style>
@@ -2822,7 +2836,7 @@ function showPage(pg,tab,item){
   if(all)tab='det';
   if(cur.p!==pg.id){T=null;st.sub=null;st.subName='';if(!all&&cur.p==='ALL'){}}
   cur={p:pg.id,tab,row:''};
-  if(tab==='sum')SV=innerWidth<=640?'st':'tl';
+  if(tab==='sum')SV='tl';
   $('#v-page').hidden=false;$('#subbar').hidden=all;
   $('#v-page').dataset.g=pg.id;
   /* lọc theo trang và (nếu có) theo thanh chương trình */
@@ -2914,11 +2928,26 @@ function renderSum(){
   if(sv==='st'){
     h+=pg.rows.map(r=>{
       const live=r.items.some(i=>iStat(i,st.date)==='live');
-      const its=r.items.map(it=>{
-        const s=iStat(it,st.date),tg=s==='live'?'<span class="tag st-live">Đang chạy</span>':s==='soon'?'<span class="tag st-soon">Sắp chạy</span>':'<span class="tag st-end">Đã kết thúc</span>';
+      const KL={top:'Top doanh thu',base:'Ưu đãi nền',brand:'Nhãn hàng',adhoc:'Ưu đãi theo đợt',dm:'Hàng danh mục',on:'Online'};
+      const dlS=iso=>Math.round((Date.UTC(+iso.slice(0,4),+iso.slice(5,7)-1,+iso.slice(8,10))-Date.UTC(+st.date.slice(0,4),+st.date.slice(5,7)-1,+st.date.slice(8,10)))/864e5);
+      const split=it=>{let n=it.name.replace(/^CT\d\s*·\s*/,'');const m=/^([^:]{3,60}):\s+(.+)$/.exec(n);return m?{type:m[1],title:m[2]}:{type:KL[it.k]||'Ưu đãi',title:n}};
+      const card=(it,inGrp)=>{
+        const s=iStat(it,st.date),sp=split(it);
+        const tg=s==='live'?'<span class="tag st-live">Đang chạy</span>':s==='soon'?'<span class="tag st-soon">Sắp chạy</span>':'<span class="tag st-end">Đã kết thúc</span>';
+        const end=it.days?it.days[it.days.length-1]:it.to,fr=it.days?it.days[0]:it.from;
+        const hint=s==='live'?(dlS(end)<=0?'hết hôm nay':'còn '+dlS(end)+' ngày'):s==='soon'?'bắt đầu sau '+dlS(fr)+' ngày':'';
         const win=it.days?it.daysText:`${fdFull(it.from)} đến ${fdFull(it.to)}`;
         const sale=it.sale?it.sale.split(/\s*·\s*/).map(x=>`<span class="salecode">${esc(x)}</span>`).join(''):'';
-        return `<button type="button" class="sitem k-${it.k}" data-i="${it.id}"><span class="sih"><b>${esc(it.name)}</b>${tg}</span><span class="sit">${esc(win)}${sale?' · '+sale:''}</span><ul>${it.short.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${it.conc?`<span class="cchip${it.conc.cf&&it.conc.cf.length?' cf':''}">${esc(it.conc.chip)}</span>`:''}</button>`;
+        const [b0,...bs]=it.short;
+        return `<button type="button" class="sitem k-${it.k} s-${s}" data-i="${it.id}"><span class="sih">${inGrp?'':`<span class="tpill">${esc(sp.type)}</span>`}${tg}</span><b class="stt">${esc(inGrp?sp.title:sp.title)}</b><span class="sdate">${esc(win)}${hint?` <em>· ${hint}</em>`:''}</span>${sale?`<span class="ssale">${sale}</span>`:''}<ul>${b0?`<li class="main">${esc(b0)}</li>`:''}${bs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${it.conc?`<span class="cchip${it.conc.cf&&it.conc.cf.length?' cf':''}">${esc(it.conc.chip)}</span>`:''}</button>`};
+      const grpd={};r.items.forEach(it=>{const t=split(it).type;(grpd[t]=grpd[t]||[]).push(it)});
+      const done={};
+      const its=r.items.map(it=>{
+        const t=split(it).type,g=grpd[t];
+        if(g.length<2)return card(it,false);
+        if(done[t])return '';done[t]=1;
+        const ord=g.slice().sort((a,b)=>(a.from||'').localeCompare(b.from||''));
+        return `<div class="sgroup"><div class="sgh"><span class="tpill">${esc(t)}</span><small>${g.length} đợt, xem theo thời gian</small></div><div class="sgi">${ord.map(x=>card(x,true)).join('')}</div></div>`;
       }).join('');
       return `<section class="srow${live?' live':''}" data-row="${esc(r.code)}"><h3><span class="gcode">${esc(r.code)}</span>${esc(r.label)}${live?'<span class="gnow">Đang chạy</span>':''}</h3><div class="sitems">${its}</div></section>`;
     }).join('');
