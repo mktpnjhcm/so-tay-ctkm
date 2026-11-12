@@ -1,16 +1,108 @@
 {
-"updates": [
-{
-"id": "u20261111-1420",
-"date": "11/11/2026",
-"tag": "MỚI CẬP NHẬT",
-"title": "Đã cập nhật đầy đủ thông tin CTKM và giao diện mới trên điện thoại",
-"body": [
-"Thông tin CTKM tháng 11 đã được cập nhật đầy đủ, kèm các thông báo triển khai mới nhất.",
-"Giao diện điện thoại được làm lại."
-],
-"link": "#/",
-"btn": "XEM TRANG CHỦ"
-}
-]
+ "updates": [
+  {
+   "id": "u20261112-ttsom",
+   "date": "12/11/2026",
+   "tag": "CTKM MỚI",
+   "title": "Chăm sóc KH nhận thanh toán sớm",
+   "body": [
+    "Ưu đãi nổi bật: giảm đến 20% (Kim cương, Vỏ, Đá màu, Ngọc trai, Đồng hồ, Bạc, HKCC), CZ/ECZ 18%, tiền công 12%.",
+    "Áp dụng cho KH bán lại nhận ZNS/SMS, 1 lần mua, không giới hạn giá trị hóa đơn, được áp dụng đơn cọc. Hiệu lực 01/10 đến 31/12/2026.",
+    "Sale deal: Offline 70007082, Online 70007083."
+   ],
+   "where": "Nhánh CXCS, mục B2.6",
+   "acts": [
+    {
+     "t": "XEM NHANH",
+     "l": "#/B2/sum/ttsom"
+    },
+    {
+     "t": "XEM CHI TIẾT",
+     "l": "#/B2/det/ttsom"
+    },
+    {
+     "t": "LÀM BÀI TEST",
+     "l": "#/B2/test"
+    }
+   ]
+  },
+  {
+   "id": "u20261112-coop",
+   "date": "12/11/2026",
+   "tag": "CTKM MỚI",
+   "title": "Partnership Co.opmart",
+   "body": [
+    "Ưu đãi nổi bật: e-code giảm 9% (tối đa 1,5tr), khách lần đầu 10%, Bạc 12%, TS Ý và dây chuyền Vàng/PT 5%.",
+    "Giai đoạn 2: 19/10 đến 31/12/2026. Mã 70006886 dùng sau 30 phút, SĐT xuất hóa đơn phải trùng SĐT nhận tin.",
+    "Không đồng thời CT giảm giá, VIP, VIP Pass, quà hiện vật. Được đồng thời trả góp, rút thăm."
+   ],
+   "where": "Nhánh Partnership, mục B3.9",
+   "acts": [
+    {
+     "t": "XEM NHANH",
+     "l": "#/B3/sum/coop"
+    },
+    {
+     "t": "XEM CHI TIẾT",
+     "l": "#/B3/det/coop"
+    },
+    {
+     "t": "LÀM BÀI TEST",
+     "l": "#/B3/test"
+    }
+   ]
+  },
+  {
+   "id": "u20261112-hlc",
+   "date": "12/11/2026",
+   "tag": "CTKM MỚI",
+   "title": "Partnership Highlands Coffee",
+   "body": [
+    "Ưu đãi nổi bật: e-code giảm 9% (tối đa 1tr), khách lần đầu 10%, hóa đơn từ 20tr giảm 1,8tr, Bạc 12%.",
+    "Giai đoạn 2: 06/10 đến 31/12/2026 (mã 70006919). Mã giai đoạn 1 (70006918) đã hết hạn 30/09/2026.",
+    "Không đồng thời CT giảm giá, VIP, VIP Pass, quà hiện vật. Được đồng thời trả góp, rút thăm."
+   ],
+   "where": "Nhánh Partnership, mục B3.10",
+   "acts": [
+    {
+     "t": "XEM NHANH",
+     "l": "#/B3/sum/hlc"
+    },
+    {
+     "t": "XEM CHI TIẾT",
+     "l": "#/B3/det/hlc"
+    },
+    {
+     "t": "LÀM BÀI TEST",
+     "l": "#/B3/test"
+    }
+   ]
+  },
+  {
+   "id": "u20261112-vip10",
+   "date": "12/11/2026",
+   "tag": "CTKM CÒN HIỆU LỰC",
+   "title": "VIP Pass T10 và e-code ARTA T10 (dùng đến 15/12)",
+   "body": [
+    "Lưu ý: ưu đãi tháng 10 vẫn dùng đến hết 15/12/2026.",
+    "VIP Pass T10: Kim cương, Vỏ, Đá màu, Ngọc trai 25%. ECZ, CZ, Bạc, HKCC, tiền công 20%. Hóa đơn từ 70 triệu tặng thêm tranh ARTA.",
+    "E-code ARTA T10: giảm 10% khi mua BST Thập Nhị Linh Thú hoặc Quân Mã Chinh Phục."
+   ],
+   "where": "Nhánh CXCS, mục B2.7 Tồn từ CT tháng 10",
+   "acts": [
+    {
+     "t": "XEM NHANH",
+     "l": "#/B2/sum/vip10"
+    },
+    {
+     "t": "XEM CHI TIẾT",
+     "l": "#/B2/det/vip10"
+    },
+    {
+     "t": "LÀM BÀI TEST",
+     "l": "#/B2/test"
+    }
+   ]
+  }
+ ]
 }
