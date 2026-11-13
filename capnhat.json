@@ -1,6 +1,28 @@
 {
  "updates": [
   {
+   "id": "u20261113-go-coop-hlc",
+   "date": "13/11/2026",
+   "tag": "NGỪNG TRIỂN KHAI",
+   "title": "Ngừng triển khai CT liên kết đối tác Co.opmart và Highlands Coffee",
+   "body": [
+    "Chương trình liên kết đối tác Co.opmart và Highlands Coffee đã dừng từ trước tháng 11/2026. Không tư vấn và không áp dụng e-code của 2 đối tác này cho khách.",
+    "Hai chương trình đã được gỡ khỏi sổ tay (trang chủ, Chi tiết, tìm kiếm và bài test).",
+    "Khách còn giữ e-code đã nhận trước đó: vui lòng gửi câu hỏi cho Team MKT để được hướng dẫn xử lý."
+   ],
+   "where": "Nhánh Partnership (B3)",
+   "acts": [
+    {
+     "t": "XEM NHÁNH PARTNERSHIP",
+     "l": "#/B3/sum"
+    },
+    {
+     "t": "GỬI CÂU HỎI",
+     "l": "#/B3/qa"
+    }
+   ]
+  },
+  {
    "id": "u20261112-ttsom",
    "date": "12/11/2026",
    "tag": "CTKM MỚI",
@@ -23,58 +45,6 @@
     {
      "t": "LÀM BÀI TEST",
      "l": "#/B2/test"
-    }
-   ]
-  },
-  {
-   "id": "u20261112-coop",
-   "date": "12/11/2026",
-   "tag": "CTKM MỚI",
-   "title": "Partnership Co.opmart",
-   "body": [
-    "Ưu đãi nổi bật: e-code giảm 9% (tối đa 1,5tr), khách lần đầu 10%, Bạc 12%, TS Ý và dây chuyền Vàng/PT 5%.",
-    "Giai đoạn 2: 19/10 đến 31/12/2026. Mã 70006886 dùng sau 30 phút, SĐT xuất hóa đơn phải trùng SĐT nhận tin.",
-    "Không đồng thời CT giảm giá, VIP, VIP Pass, quà hiện vật. Được đồng thời trả góp, rút thăm."
-   ],
-   "where": "Nhánh Partnership, mục B3.9",
-   "acts": [
-    {
-     "t": "XEM NHANH",
-     "l": "#/B3/sum/coop"
-    },
-    {
-     "t": "XEM CHI TIẾT",
-     "l": "#/B3/det/coop"
-    },
-    {
-     "t": "LÀM BÀI TEST",
-     "l": "#/B3/test"
-    }
-   ]
-  },
-  {
-   "id": "u20261112-hlc",
-   "date": "12/11/2026",
-   "tag": "CTKM MỚI",
-   "title": "Partnership Highlands Coffee",
-   "body": [
-    "Ưu đãi nổi bật: e-code giảm 9% (tối đa 1tr), khách lần đầu 10%, hóa đơn từ 20tr giảm 1,8tr, Bạc 12%.",
-    "Giai đoạn 2: 06/10 đến 31/12/2026 (mã 70006919). Mã giai đoạn 1 (70006918) đã hết hạn 30/09/2026.",
-    "Không đồng thời CT giảm giá, VIP, VIP Pass, quà hiện vật. Được đồng thời trả góp, rút thăm."
-   ],
-   "where": "Nhánh Partnership, mục B3.10",
-   "acts": [
-    {
-     "t": "XEM NHANH",
-     "l": "#/B3/sum/hlc"
-    },
-    {
-     "t": "XEM CHI TIẾT",
-     "l": "#/B3/det/hlc"
-    },
-    {
-     "t": "LÀM BÀI TEST",
-     "l": "#/B3/test"
     }
    ]
   },
