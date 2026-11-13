@@ -1,10 +1,29 @@
 {
  "updates": [
   {
+   "id": "u20261114-ct2-dieuchinh",
+   "date": "13/11/2026",
+   "tag": "ĐIỀU CHỈNH CT2",
+   "title": "CT2 điều chỉnh từ 14/11: đổi quà tặng kèm và nâng mốc hóa đơn",
+   "body": [
+    "Từ 14/11: khi mua từ 2 món TS Tích sản, Thời trang, Hàm lượng vàng cao, quà tặng kèm đổi từ Bình giữ nhiệt sang Túi Tote thời trang (mức giảm 20%, 16%, 9% giữ nguyên).",
+    "Từ 14/11: quà đặc quyền Tranh Lời Vàng Ý Ngọc, Bộ cờ vua cao cấp, Đồng hồ đến 3 triệu nâng mốc hóa đơn từ 25 triệu lên 30 triệu (tính trên nguyên giá).",
+    "Từ 12/11 đến 13/11 vẫn áp dụng mốc 25 triệu. Tuần lễ Độc thân (đến 11/11) giữ nguyên Combo 03 Thẻ dát vàng, HĐ từ 25 triệu.",
+    "Lưu ý: thông báo triển khai (TBTK) dạng ảnh trong sổ tay chưa phải bản điều chỉnh, nội dung chữ trong sổ tay đã cập nhật theo bảng điều chỉnh."
+   ],
+   "where": "CT2: Ưu đãi đa tầng (A1)",
+   "acts": [
+    {
+     "t": "XEM CT2",
+     "l": "#/A1/sum"
+    }
+   ]
+  },
+  {
    "id": "u20261113-go-coop-hlc",
    "date": "13/11/2026",
    "tag": "NGỪNG TRIỂN KHAI",
-   "title": "Ngừng triển khai CT liên kết đối tác Co.opmart và Highlands Coffee",
+   "title": "Gỡ CT liên kết đối tác Co.opmart và Highlands Coffee",
    "body": [
     "Chương trình liên kết đối tác Co.opmart và Highlands Coffee đã dừng từ trước tháng 11/2026. Không tư vấn và không áp dụng e-code của 2 đối tác này cho khách.",
     "Hai chương trình đã được gỡ khỏi sổ tay (trang chủ, Chi tiết, tìm kiếm và bài test).",
