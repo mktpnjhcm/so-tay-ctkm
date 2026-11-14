@@ -15,7 +15,7 @@
    "acts": [
     {
      "t": "XEM CT2",
-     "l": "#/A1/sum"
+     "l": "#/ct/A1.2"
     }
    ]
   },
@@ -33,11 +33,11 @@
    "acts": [
     {
      "t": "XEM NHÁNH PARTNERSHIP",
-     "l": "#/B3/sum"
+     "l": "#/ct/B3.1"
     },
     {
      "t": "GỬI CÂU HỎI",
-     "l": "#/B3/qa"
+     "l": "#/hoidap"
     }
    ]
   },
@@ -54,16 +54,16 @@
    "where": "Nhánh CXCS, mục B2.6",
    "acts": [
     {
-     "t": "XEM NHANH",
-     "l": "#/B2/sum/ttsom"
+     "t": "XEM CHƯƠNG TRÌNH",
+     "l": "#/ct/B2.6"
     },
     {
-     "t": "XEM CHI TIẾT",
-     "l": "#/B2/det/ttsom"
+     "t": "XEM TBTK",
+     "l": "#/ct/B2.6?tb=B2~ttsom"
     },
     {
      "t": "LÀM BÀI TEST",
-     "l": "#/B2/test"
+     "l": "#/hoc"
     }
    ]
   },
@@ -80,16 +80,16 @@
    "where": "Nhánh CXCS, mục B2.7 Tồn từ CT tháng 10",
    "acts": [
     {
-     "t": "XEM NHANH",
-     "l": "#/B2/sum/vip10"
+     "t": "XEM CHƯƠNG TRÌNH",
+     "l": "#/ct/B2.7"
     },
     {
-     "t": "XEM CHI TIẾT",
-     "l": "#/B2/det/vip10"
+     "t": "XEM TBTK",
+     "l": "#/ct/B2.7?tb=B2~vip10"
     },
     {
      "t": "LÀM BÀI TEST",
-     "l": "#/B2/test"
+     "l": "#/hoc"
     }
    ]
   }
